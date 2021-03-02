@@ -13,7 +13,7 @@ function setup() {
   createCanvas(1500,700);
 
   balloon=createSprite(250,650,150,150);
-  balloon.addAnimation("hotAirBalloon",balloon1);
+  balloon.addImage("hotAirBalloon",balloon1);
   balloon.scale=0.5;
 
   var balloonHeight=database.ref('balloon/height');
@@ -50,6 +50,19 @@ function draw() {
   text("**Use arrow keys to move Hot Air Balloon!",40,40);
 }
 
+function updateHeight(x,y){
+  database.ref('balloon/height').set({
+    'x': height.x + x ,
+    'y': height.y + y
+  })
+}
+
+function readHeight(data){
+  height = data.val();
+  console.log(height.x);
+  balloon.x = height.x;
+  balloon.y = height.y;
+}
  
 
 function showError(){
